@@ -1,0 +1,13 @@
+.box {
+  width: 200px;
+  height: 200px;
+  background: #f66;
+  overflow: hidden;
+  display: flex;
+  .slide {
+    width: 100px;
+    height: 100px;
+    background: #999;
+    margin: 50px auto;
+  }
+}

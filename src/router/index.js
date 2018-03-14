@@ -1,13 +1,14 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Test from '@/page/test';
+import IndexPage from '@/page/index';
 
 Vue.use(Router)
 
 export default new Router({
-  routes: [{
-    path: '/',
-    name: 'Test',
-    component: Test
-  }]
+    mode: 'history',
+    routes: [{
+        path: '/',
+        name: 'Index',
+        component: IndexPage
+    }]
 })

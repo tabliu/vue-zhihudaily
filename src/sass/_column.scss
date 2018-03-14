@@ -1,0 +1,46 @@
+/* column
+---------------------------------- */
+
+.mod-column {
+    overflow: hidden;
+    &-head {
+        @include border(bottom);
+        position: relative;
+        padding: px2rem($gap-base) px2rem($gap-main);
+        overflow: hidden;
+    }
+    &-title {
+        @include float;
+        font-size: px2rem($font-size-large);
+        font-weight: $font-weight-bold;
+        line-height: px2rem(24px);
+        &::before {
+            content: "";
+            @include float;
+            width: px2rem(4px);
+            height: px2rem(16px);
+            background-color: $icon-color-base;
+            background-clip: padding-box;
+            margin: px2rem(4px) px2rem(16px) 0 -#{px2rem($gap-main)};
+        }
+    }
+    &-tool {
+        @include float(right);
+        color: $text-color-tiny;
+        font-size: px2rem($font-size-base);
+        font-weight: $font-weight-base;
+        line-height: px2rem(22px);
+        padding: px2rem(1px) 0;
+        overflow: hidden;
+    }
+    a#{&}-tool::after {
+        content: "";
+        @include float(right);
+        width: px2rem(6px);
+        height: px2rem(6px);
+        border-top: px2rem(1px) solid $border-color-tiny;
+        border-right: px2rem(1px) solid $border-color-tiny;
+        margin: px2rem(7px) px2rem(2px) 0 px2rem(6px);
+        @include css3(transform, rotate(45deg));
+    }
+}

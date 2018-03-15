@@ -24,7 +24,9 @@ html {
 
 body {
     min-width: 320px;
+    max-width: 1024px;
     background-color: $bg-color-base;
+    margin: 0 auto;
 }
 
 body,
@@ -93,6 +95,6 @@ img {
 /* space
 ---------------------------------- */
 
-.dm-space {
+.mod-space {
     margin-top: $gap-base;
 }

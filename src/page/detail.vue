@@ -1,32 +1,22 @@
 <template>
   <div class="mod-page">
     <Header
-    headerTitle="首页"
+      headerTitle=""
       :headerFixed="true"
-      :headerMenuShow="true"
-      :headerTodoShow="true"
-      :headerOptionShow="true"
+      :headerBackShow="true"
+      :headerShareShow="true"
+      :headerFavriteShow="true"
+      :headerCommentShow="true"
+      :headerThumbShow="true"
     />
     <!-- section start -->
     <section class="mod-content">
-      <Slider 
-        :sliders="sliders"
-        :inv="sliderSpeed"
-      />
       <!-- column start -->
-      <div class="mod-column" :class="news.class">
+      <div class="mod-column" :class="detail.class">
         <div class="mod-column-head">
-          <h2 class="mod-column-title">{{ news.title }}</h2>
+          <h2 class="mod-column-title">{{ detail.title }}</h2>
         </div>
         <div class="mod-column-body">
-          <ul class="mod-list">
-            <li class="mod-list-item" v-for="item in news.list">
-              <a href="/detail" class="product-info">
-                <h3 class="product-title">{{ item.title }}</h3>
-                <img :src="item.images" :alt="item.title" class="product-image"/>
-              </a>
-            </li>
-          </ul>
         </div>
       </div>
       <!-- column end -->
@@ -38,28 +28,25 @@
 <script>
 //引入组件
 import Header from "../components/header";
-import Slider from "../components/slider";
 
 export default {
   components: {
-    Header,
-    Slider
+    Header
   },
   data: function() {
     return {
       sliders: [],
       sliderSpeed: 2000,
-      news: {
-        class: "news",
-        title: "今日热闻",
-        list: []
+      detail: {
+        class: "detail",
+        title: "资讯详情",
+        contents: []
       }
     };
   },
   mounted() {
-    axios.get("/api/mock/23/api/4/news/latest").then(res => {
-      this.news.list = res.data.stories;
-      this.sliders = res.data.top_stories;
+    axios.get("/api/mock/23/api/4/news/:id").then(res => {
+      //this.detail.contents = res.data.stories;
     });
   }
 };

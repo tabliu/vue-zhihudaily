@@ -207,6 +207,7 @@
 }
 
 // text-hide
+// @extend %text-hide
 //-----------------------------------------------------
 @mixin text-hide {
     font-size: 0;

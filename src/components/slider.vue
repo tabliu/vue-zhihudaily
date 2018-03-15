@@ -2,7 +2,7 @@
     <!-- slider start -->
     <div class="mod-slider" @mouseover="clearInv" @mouseout="runInv">
         <div class="mod-slider-image">
-            <a :href="sliders[nowIndex].url"><img :src="sliders[nowIndex].src" :alt="sliders[nowIndex].title"></a>
+            <a href="javascript:;"><img :src="sliders[nowIndex].image" :alt="sliders[nowIndex].title"></a>
         </div>
         <h2 class="mod-slider-title">{{ sliders[nowIndex].title }}</h2>
         <ul class="mod-slider-index">
@@ -20,12 +20,7 @@
     
 export default {
     props: {
-        sliders: {
-            type: Array,
-            default: function () {
-                return []
-            }
-        },
+        sliders: [],
         inv: {
             type: Number,
             default: 1000
@@ -87,6 +82,28 @@ export default {
     text-align: center;
     overflow: hidden;
 
+    &-image {
+        position: relative;
+        height: px2rem(375px);
+        overflow: hidden;
+        &::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
+            background-image: linear-gradient(to top, rgba(0, 0, 0, .68), rgba(0, 0, 0, .01));
+        }
+
+        img {
+            display: block;
+            width: px2rem(375px);
+            max-width: px2rem(375px);
+            min-height: px2rem(375px);
+        }
+    }
+
     &-title {
         position: absolute;
         right: px2rem(20px);
@@ -114,11 +131,11 @@ export default {
             width: px2rem(8px);
             height: px2rem(8px);
             border-radius: px2rem(8px);
-            background-color: rgba(0, 0, 0, .3);
+            background-color: #888;
             margin: 0 2px;
 
             &.active {
-                background-color: rgba(0, 0, 0, .8);
+                background-color: #fff;
             }
         }
     }
@@ -151,12 +168,6 @@ export default {
     &-next {
         right: 20px;
         left: auto;
-    }
-
-    img {
-        display: block;
-        width: 100%;
-        max-width: 100%;
     }
 }
 

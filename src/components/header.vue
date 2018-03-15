@@ -1,11 +1,15 @@
 <template>
     <!-- header start -->
-    <header class="dm-header" :class="{'dm-header-fixed': headerFixed}" v-if="headerShow">
-        <h1 class="dm-header-title">{{ headerTitle }}</h1>
-        <i class="dm-header-back" v-if="headerBackShow" @click="toBack">{{ headerBack }}</i>
-        <i class="dm-header-menu" v-if="headerMenuShow" @click="toMenu">{{ headerMenu }}</i>
-        <i class="dm-header-todo" v-if="headerTodoShow" @click="toTodo">{{ headerTodo }}</i>
-        <i class="dm-header-option" v-if="headerOptionShow" @click="toOption">{{ headerOption }}</i>
+    <header class="mod-header" :class="{'mod-header-fixed': headerFixed}" v-if="headerShow">
+        <h1 class="mod-header-title" v-if="headerTitleShow">{{ headerTitle }}</h1>
+        <i class="mod-header-back" v-if="headerBackShow" @click="toBack">{{ headerBack }}</i>
+        <i class="mod-header-menu" v-if="headerMenuShow" @click="toMenu">{{ headerMenu }}</i>
+        <i class="mod-header-todo" v-if="headerTodoShow" @click="toTodo">{{ headerTodo }}</i>
+        <i class="mod-header-option" v-if="headerOptionShow" @click="toOption">{{ headerOption }}</i>
+        <i class="mod-header-share" v-if="headerShareShow" @click="toShare">{{ headerShare }}</i>
+        <i class="mod-header-favrite" v-if="headerFavriteShow" @click="toFavrite">{{ headerFavrite }}</i>
+        <i class="mod-header-comment" v-if="headerCommentShow" @click="toComment">{{ headerComment }}</i>
+        <i class="mod-header-thumb" v-if="headerThumbShow" @click="toThumb">{{ headerThumb }}</i>
     </header>
     <!-- header end -->
 </template>
@@ -26,13 +30,17 @@ export default {
             type: String,
             default: '页面标题'
         },
+        headerTitleShow:{
+            type: Boolean,
+            default: true
+        },
         headerBack: {
             type: String,
             default: '返回'
         },
         headerBackShow:{
             type: Boolean,
-            default: true
+            default: false
         },
         headerMenu: {
             type: String,
@@ -58,6 +66,38 @@ export default {
             type: Boolean,
             default: false
         },
+        headerShare: {
+            type: String,
+            default: '分享'
+        },
+        headerShareShow: {
+            type: Boolean,
+            default: false
+        },
+        headerFavrite: {
+            type: String,
+            default: '收藏'
+        },
+        headerFavriteShow: {
+            type: Boolean,
+            default: false
+        },
+        headerComment: {
+            type: String,
+            default: '0'
+        },
+        headerCommentShow: {
+            type: Boolean,
+            default: false
+        },
+        headerThumb: {
+            type: String,
+            default: '0'
+        },
+        headerThumbShow: {
+            type: Boolean,
+            default: false
+        },
         backClick:{
             type: Boolean,
             default:true
@@ -73,16 +113,30 @@ export default {
         optionClick:{
             type: Boolean,
             default:true
+        },
+        favriteClick:{
+            type: Boolean,
+            default:true
+        },
+        shareClick:{
+            type: Boolean,
+            default:true
+        },
+        commentClick:{
+            type: Boolean,
+            default:true
+        },
+        thumbClick:{
+            type: Boolean,
+            default:true
         }
     },
     mounted(){
-        
     },
     methods:{
         toBack(){
             if(this.backClick){
                 history.back();
-                alert('11');
             }else{
                 return ;
             }
@@ -107,6 +161,34 @@ export default {
             }else{
                 return ;
             }
+        },
+        toShare(){
+            if(this.shareClick){
+                return ;
+            }else{
+                return ;
+            }
+        },
+        toFavrite(){
+            if(this.favriteClick){
+                return ;
+            }else{
+                return ;
+            }
+        },
+        toComment(){
+            if(this.commentClick){
+                return ;
+            }else{
+                return ;
+            }
+        },
+        toThumb(){
+            if(this.thumbClick){
+                return ;
+            }else{
+                return ;
+            }
         }
     }
 }
@@ -116,7 +198,7 @@ export default {
 @import "../sass/base";
 /* header
 ---------------------------------- */
-.dm-header {
+.mod-header {
     @include flex;
     @include flex-align(center);
     position: relative;
@@ -135,24 +217,25 @@ export default {
     }
 
     &-back {
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: 100%;
-        padding-right: $gap-base;
-        padding-left: 32px;
+        @include flex-order(-1);
+        display: block;
+        position: relative;
+        box-sizing: border-box;
+        min-width: px2rem(24px);
+        height: px2rem(24px);
         @extend %text-hide;
+        margin: 0 px2rem(20px);
 
         &::before {
             content: "";
             position: absolute;
             top: 50%;
-            left: 16px;
-            width: 9px;
-            height: 16px;
-            background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAgCAMAAAAootjDAAAAV1BMVEUAAAD///9EREZEQ0VHQkdFQ0VEQ0RERERFQ0VGRkZDQkREQkVFQkVHR0dFRUVFQ0VEQkVDQkP///9DQ0NFQkVDQ0RDQ0VEREtEQkRGQ0ZEREdDQ0VDQkQy+pIIAAAAHHRSTlMAAIDxNn7wOG8h/q26JFlc8/MBtrW7gSJ/WF6uzoouTgAAAFFJREFUeF7Vz7cVgDAQBNEVVsJ7e/3XiQj3bQMw4c8GTgLX135iyc2sE7FNJG1Fys9II7KIhCrK8ArTmNH+bLGCbVVD8gvb1Q6IneCu2wNOegA79A6Xq/qOMwAAAABJRU5ErkJggg==) no-repeat 0 0;
-            background-size: 9px auto;
-            margin-top: -8px;
+            left: 50%;
+            width: px2rem(24px);
+            height: px2rem(24px);
+            background: url(../images/icon_back.png) no-repeat;
+            background-size: px2rem(24px) auto;
+            @include css3(transform, (translate3d(-50%, -50%, 0)));
         }
 
         &.touch {
@@ -163,12 +246,24 @@ export default {
     &-menu {
         @include flex-order(-1);
         display: block;
-        width: px2rem(24px);
+        position: relative;
+        box-sizing: border-box;
+        min-width: px2rem(24px);
         height: px2rem(24px);
-        background: url(../images/icon_menu.png) no-repeat;
-        background-size: px2rem(24px) auto;
         @extend %text-hide;
         margin: 0 px2rem(20px);
+
+        &::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: px2rem(24px);
+            height: px2rem(24px);
+            background: url(../images/icon_menu.png) no-repeat;
+            background-size: px2rem(24px) auto;
+            @include css3(transform, (translate3d(-50%, -50%, 0)));
+        }
 
         &.touch {
             opacity: .5;
@@ -177,12 +272,24 @@ export default {
 
     &-todo {
         display: block;
-        width: px2rem(24px);
+        position: relative;
+        box-sizing: border-box;
+        min-width: px2rem(24px);
         height: px2rem(24px);
-        background: url(../images/icon_clock.png) no-repeat;
-        background-size: px2rem(24px) auto;
         @extend %text-hide;
-        margin: 0 px2rem(16px);
+        margin: 0 px2rem($gap-base);
+
+        &::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: px2rem(24px);
+            height: px2rem(24px);
+            background: url(../images/icon_todo.png) no-repeat;
+            background-size: px2rem(24px) auto;
+            @include css3(transform, (translate3d(-50%, -50%, 0)));
+        }
 
         &.touch {
             opacity: .5;
@@ -191,16 +298,142 @@ export default {
 
     &-option {
         display: block;
-        width: px2rem(24px);
+        position: relative;
+        box-sizing: border-box;
+        min-width: px2rem(24px);
         height: px2rem(24px);
-        background: url(../images/icon_option.png) no-repeat;
-        background-size: px2rem(24px) auto;
         @extend %text-hide;
-        margin: 0 px2rem(16px);
+        margin: 0 px2rem($gap-base);
+
+        &::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: px2rem(24px);
+            height: px2rem(24px);
+            background: url(../images/icon_option.png) no-repeat;
+            background-size: px2rem(24px) auto;
+            @include css3(transform, (translate3d(-50%, -50%, 0)));
+        }
 
         &.touch {
             opacity: .5;
         }
+    }
+
+    &-share {
+        display: block;
+        position: relative;
+        box-sizing: border-box;
+        min-width: px2rem(32px);
+        height: px2rem(32px);
+        @extend %text-hide;
+        margin: 0 px2rem($gap-base);
+
+        &::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: px2rem(32px);
+            height: px2rem(32px);
+            background: url(../images/icon_share.png) no-repeat;
+            background-size: px2rem(32px) auto;
+            @include css3(transform, (translate3d(-50%, -50%, 0)));
+        }
+
+        &.touch {
+            opacity: .5;
+        }
+    }
+
+    &-favrite {
+        display: block;
+        position: relative;
+        box-sizing: border-box;
+        min-width: px2rem(32px);
+        height: px2rem(32px);
+        @extend %text-hide;
+        margin: 0 px2rem($gap-base);
+
+        &::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: px2rem(32px);
+            height: px2rem(32px);
+            background: url(../images/icon_favrite.png) no-repeat;
+            background-size: px2rem(32px) auto;
+            @include css3(transform, (translate3d(-50%, -50%, 0)));
+        }
+
+        &.touch {
+            opacity: .5;
+        }
+    }
+
+    &-comment {
+        display: block;
+        position: relative;
+        box-sizing: border-box;
+        min-width: px2rem(32px);
+        height: px2rem(32px);
+        color: $text-color-main;
+        font-size: px2rem($font-size-large);
+        line-height: px2rem(32px);
+        padding-left: px2rem(40px);
+        margin: 0 px2rem($gap-base);
+
+        &::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: px2rem(32px);
+            height: px2rem(32px);
+            background: url(../images/icon_comment.png) no-repeat;
+            background-size: px2rem(32px) auto;
+            @include css3(transform, (translate3d(0, -50%, 0)));
+        }
+
+        &.touch {
+            opacity: .5;
+        }
+    }
+
+    &-thumb {
+        display: block;
+        position: relative;
+        box-sizing: border-box;
+        min-width: px2rem(32px);
+        height: px2rem(32px);
+        color: $text-color-main;
+        font-size: px2rem($font-size-large);
+        line-height: px2rem(32px);
+        padding-left: px2rem(40px);
+        margin: 0 px2rem($gap-base);
+
+        &::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: px2rem(32px);
+            height: px2rem(32px);
+            background: url(../images/icon_thumb.png) no-repeat;
+            background-size: px2rem(32px) auto;
+            @include css3(transform, (translate3d(0, -50%, 0)));
+        }
+
+        &.touch {
+            opacity: .5;
+        }
+    }
+
+    i:last-child {
+        margin-right: px2rem(20px);
     }
 
     @at-root {

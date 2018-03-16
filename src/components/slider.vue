@@ -2,7 +2,7 @@
     <!-- slider start -->
     <div class="mod-slider" @mouseover="clearInv" @mouseout="runInv">
         <div class="mod-slider-image">
-            <a href="javascript:;"><img :src="sliders[nowIndex].image" :alt="sliders[nowIndex].title"></a>
+            <router-link to="javascript:;"><img :src="sliders[nowIndex].image" :alt="sliders[nowIndex].title"></router-link> 
         </div>
         <h2 class="mod-slider-title">{{ sliders[nowIndex].title }}</h2>
         <ul class="mod-slider-index">
@@ -21,6 +21,14 @@
 export default {
     props: {
         sliders: [],
+        image: {
+            type: String,
+            default: '',
+        },
+        title: {
+            type: String,
+            default: '',
+        },
         inv: {
             type: Number,
             default: 1000

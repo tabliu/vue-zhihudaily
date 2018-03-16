@@ -11,6 +11,8 @@
     <section class="mod-content">
       <Slider 
         :sliders="sliders"
+        :image="image"
+        :title="title"
         :inv="sliderSpeed"
       />
       <!-- column start -->
@@ -21,10 +23,10 @@
         <div class="mod-column-body">
           <ul class="mod-list">
             <li class="mod-list-item" v-for="item in news.list">
-              <a href="/detail" class="product-info">
+              <router-link :to="{ name: 'detail', params: { newsId: item.id }}" class="product-info">
                 <h3 class="product-title">{{ item.title }}</h3>
                 <img :src="item.images" :alt="item.title" class="product-image"/>
-              </a>
+              </router-link>
             </li>
           </ul>
         </div>
@@ -45,7 +47,7 @@ export default {
     Header,
     Slider
   },
-  data: function() {
+  data () {
     return {
       sliders: [],
       sliderSpeed: 2000,
@@ -56,10 +58,10 @@ export default {
       }
     };
   },
-  mounted() {
-    axios.get("/api/mock/23/api/4/news/latest").then(res => {
-      this.news.list = res.data.stories;
+  mounted () {
+    axios.get("/api/4/news/latest").then(res => {
       this.sliders = res.data.top_stories;
+      this.news.list = res.data.stories;
     });
   }
 };

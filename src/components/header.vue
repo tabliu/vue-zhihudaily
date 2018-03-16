@@ -15,7 +15,7 @@
 </template>
 
 <script>
-    
+
 export default {
     props: {
         headerShow:{
@@ -83,16 +83,16 @@ export default {
             default: false
         },
         headerComment: {
-            type: String,
-            default: '0'
+            type: Number,
+            default: 0
         },
         headerCommentShow: {
             type: Boolean,
             default: false
         },
         headerThumb: {
-            type: String,
-            default: '0'
+            type: Number,
+            default: 0
         },
         headerThumbShow: {
             type: Boolean,

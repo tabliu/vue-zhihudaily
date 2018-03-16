@@ -9,12 +9,12 @@ export default new Router({
     mode: 'history',
     routes: [{
             path: '/',
-            name: 'Index',
+            name: 'index',
             component: IndexPage
         },
         {
-            path: '/detail',
-            name: 'Detail',
+            path: '/detail/newsId=:newsId',
+            name: 'detail',
             component: DetailPage
         }
     ]

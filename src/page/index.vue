@@ -16,14 +16,14 @@
         :inv="sliderSpeed"
       />
       <!-- column start -->
-      <div class="mod-column" :class="news.class">
+      <div class="mod-column" :class="post.class">
         <div class="mod-column-head">
-          <h2 class="mod-column-title">{{ news.title }}</h2>
+          <h2 class="mod-column-title">{{ post.title }}</h2>
         </div>
         <div class="mod-column-body">
           <ul class="mod-list">
-            <li class="mod-list-item" v-for="item in news.list">
-              <router-link :to="{ name: 'detail', params: { newsId: item.id }}" class="product-info">
+            <li class="mod-list-item" v-for="item in post.list">
+              <router-link :to="{ name: 'detail', params: { postId: item.id }}" class="product-info">
                 <h3 class="product-title">{{ item.title }}</h3>
                 <img :src="item.images" :alt="item.title" class="product-image"/>
               </router-link>
@@ -41,7 +41,6 @@
 //引入组件
 import Header from "../components/header";
 import Slider from "../components/slider";
-
 export default {
   components: {
     Header,
@@ -51,8 +50,8 @@ export default {
     return {
       sliders: [],
       sliderSpeed: 2000,
-      news: {
-        class: "news",
+      post: {
+        class: "hotpost",
         title: "今日热闻",
         list: []
       }
@@ -61,8 +60,13 @@ export default {
   mounted () {
     axios.get("/api/4/news/latest").then(res => {
       this.sliders = res.data.top_stories;
-      this.news.list = res.data.stories;
+      this.post.list = res.data.stories;
     });
+  },
+  methods: {
+    doIt () {
+      console.log('do Id dd')
+    }
   }
 };
 </script>
@@ -71,10 +75,9 @@ export default {
 @import "../sass/base";
 @import "../sass/column";
 
-.news {
+.hotpost {
   .mod-column-head {
     padding-bottom: px2rem(16px);
-
     &::after {
       @include hide;
     }
@@ -83,7 +86,6 @@ export default {
     color: $text-color-assist;
     font-size: px2rem(14px);
     line-height: px2rem(22px);
-
     &::before {
       @include hide;
     }
@@ -91,7 +93,6 @@ export default {
   .mod-list-item {
     padding: 0 px2rem($gap-base) px2rem($gap-base);
   }
-
   .product-info {
     display: flex;
     @include border;
@@ -100,7 +101,6 @@ export default {
     box-shadow: 0 1px 4px 0 rgba(0, 0, 0, .2);
     padding: px2rem($gap-base) px2rem($gap-main);
   }
-
   .product-title {
     @include flex-item;
     max-height: px2rem(48px);
@@ -109,7 +109,6 @@ export default {
     line-height: px2rem(24px);
     @include text-clamp(2);
   }
-
   .product-image {
     width: px2rem(85px);
     max-width: px2rem(85px);
@@ -118,5 +117,4 @@ export default {
     margin-left: px2rem($gap-base);
   }
 }
-
 </style>

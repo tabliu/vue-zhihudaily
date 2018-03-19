@@ -22,14 +22,14 @@
           <div class="product-info">
             <div class="product-image">
               <img :src="detail.image" alt="">
-              <span>{{ detail.imageSource }}</span>
             </div>
             <h1 class="product-title">{{ detail.title }}</h1>
-            <div class="product-content">
-              <div v-html="detail.contents"></div>
-              <link rel="stylesheet" :href="detail.css">
-            </div>
-          </div>  
+            <div class="product-meta">{{ detail.imageSource }}</div>
+          </div>
+          <div class="product-content">
+            <div v-html="detail.contents"></div>
+            <link rel="stylesheet" :href="detail.css">
+          </div>
         </div>
       </div>
       <!-- column end -->
@@ -64,7 +64,7 @@ export default {
   },
   mounted () {
     // 1.组件初步加载时赋值一次
-    this.listId = this.$route.params.newsId;
+    this.listId = this.$route.params.postId;
     axios.get('/api/4/news/' + this.listId)
     .then(res => {
         this.detail.contents = res.data.id ? res.data.body : JSON.parse(res.request.response);
@@ -89,7 +89,7 @@ export default {
   watch: {
       '$route' () {
           //2. $route发生变化时再次赋值listId
-          this.listId = this.$route.params.newsId;
+          this.listId = this.$route.params.postId;
       }
   }
 };
@@ -99,51 +99,54 @@ export default {
 @import "../sass/base";
 @import "../sass/column";
 
-.news {
+.detail {
   .mod-column-head {
-    padding-bottom: px2rem(16px);
-
-    &::after {
-      @include hide;
-    }
-  }
-  .mod-column-title {
-    color: $text-color-assist;
-    font-size: px2rem(14px);
-    line-height: px2rem(22px);
-
-    &::before {
-      @include hide;
-    }
-  }
-  .mod-list-item {
-    padding: 0 px2rem($gap-base) px2rem($gap-base);
+    @include hide;
   }
 
   .product-info {
-    display: flex;
-    @include border;
-    @include border-radius;
-    background-color: $bg-color-main;
-    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, .2);
-    padding: px2rem($gap-base) px2rem($gap-main);
+    display: block;
+    position: relative;
   }
 
   .product-title {
-    @include flex-item;
-    max-height: px2rem(48px);
-    font-size: px2rem($font-size-large);
+    position: absolute;
+    left: px2rem($gap-main);
+    right: px2rem($gap-main);
+    bottom: px2rem(32px);
+    z-index: $z-index-base;
+    max-height: px2rem(56px);
+    color: $text-color-main;
+    font-size: px2rem(20px);
     font-weight: $font-weight-base;
-    line-height: px2rem(24px);
+    line-height: px2rem(28px);
+    text-align: left;
     @include text-clamp(2);
   }
 
+  .product-meta {
+    position: absolute;
+    right: px2rem($gap-main);
+    bottom: px2rem($gap-base);
+    z-index: $z-index-base;
+    color: $text-color-assist;
+    font-size: px2rem($font-size-base);
+    font-weight: $font-weight-base;
+    line-height: px2rem(20px);
+    text-align: right;
+  }
+
   .product-image {
-    width: px2rem(85px);
-    max-width: px2rem(85px);
-    height: px2rem(75px);
-    max-height: px2rem(75px);
-    margin-left: px2rem($gap-base);
+    position: relative;
+    &::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+        background-image: linear-gradient(to top, rgba(0, 0, 0, .68), rgba(0, 0, 0, .01));
+    }
   }
 }
 </style>

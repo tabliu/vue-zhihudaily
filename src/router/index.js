@@ -13,7 +13,7 @@ export default new Router({
             component: IndexPage
         },
         {
-            path: '/detail/newsId=:newsId',
+            path: '/detail/postId=:postId',
             name: 'detail',
             component: DetailPage
         }

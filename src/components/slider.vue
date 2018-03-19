@@ -1,6 +1,6 @@
 <template>
     <!-- slider start -->
-    <div class="mod-slider" @mouseover="clearInv" @mouseout="runInv">
+    <div class="mod-slider" @mouseout="runInv">
         <div class="mod-slider-image">
             <router-link to="javascript:;"><img :src="sliders[nowIndex].image" :alt="sliders[nowIndex].title"></router-link> 
         </div>
@@ -89,7 +89,6 @@ export default {
     width: 100%;
     text-align: center;
     overflow: hidden;
-
     &-image {
         position: relative;
         height: px2rem(375px);
@@ -103,7 +102,6 @@ export default {
             height: 100%;
             background-image: linear-gradient(to top, rgba(0, 0, 0, .68), rgba(0, 0, 0, .01));
         }
-
         img {
             display: block;
             width: px2rem(375px);
@@ -111,7 +109,6 @@ export default {
             min-height: px2rem(375px);
         }
     }
-
     &-title {
         position: absolute;
         right: px2rem(20px);
@@ -126,14 +123,12 @@ export default {
         -webkit-text-stroke-width: .1px;
         @include text-clamp(2);
     }
-
     &-index {
         position: absolute;
         right: 0;
         left: 0;
         bottom: px2rem(10px);
         @extend %text-hide;
-
         &-item {
             display: inline-block;
             width: px2rem(8px);
@@ -141,13 +136,11 @@ export default {
             border-radius: px2rem(8px);
             background-color: #888;
             margin: 0 2px;
-
             &.active {
                 background-color: #fff;
             }
         }
     }
-
     &-num {
         position: absolute;
         right: $gap-base + $gap-main;
@@ -160,7 +153,6 @@ export default {
         line-height: 20px;
         padding: 0 $gap-base;
     }
-
     &-prev,
     &-next {
         position: absolute;
@@ -172,11 +164,9 @@ export default {
         border-radius: 40px;
         margin-top: -20px;
     }
-
     &-next {
         right: 20px;
         left: auto;
     }
 }
-
 </style>

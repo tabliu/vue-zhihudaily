@@ -136,7 +136,9 @@ export default {
     methods:{
         toBack(){
             if(this.backClick){
-                history.back();
+                window.history.length > 1
+        ? this.$router.go(-1)
+        : this.$router.push('/')
             }else{
                 return ;
             }

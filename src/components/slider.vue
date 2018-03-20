@@ -2,7 +2,7 @@
     <!-- slider start -->
     <div class="mod-slider" @mouseout="runInv">
         <div class="mod-slider-image">
-            <router-link to="javascript:;"><img :src="sliders[nowIndex].image" :alt="sliders[nowIndex].title"></router-link> 
+            <router-link to="javascript:;"><img :src="sliders[nowIndex].image" :alt="sliders[nowIndex].title" /></router-link> 
         </div>
         <h2 class="mod-slider-title">{{ sliders[nowIndex].title }}</h2>
         <ul class="mod-slider-index">
@@ -20,19 +20,27 @@
     
 export default {
     props: {
-        sliders: [],
+        //总的数据接口
+        sliders: { 
+            type: Array,
+            default: [],
+        },
+        // 图片路径
         image: {
             type: String,
             default: '',
         },
+        // 标题
         title: {
             type: String,
             default: '',
         },
+        // 轮播间隔时间
         inv: {
             type: Number,
             default: 1000
         },
+        // 是否有点击事件
         touch: {
             type: Boolean,
             default: false

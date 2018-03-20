@@ -11,8 +11,6 @@
     <section class="mod-content">
       <Slider 
         :sliders="sliders"
-        :image="image"
-        :title="title"
         :inv="sliderSpeed"
       />
       <!-- column start -->
@@ -25,7 +23,7 @@
             <li class="mod-list-item" v-for="item in post.list">
               <router-link :to="{ name: 'detail', params: { postId: item.id }}" class="product-info">
                 <h3 class="product-title">{{ item.title }}</h3>
-                <img :src="item.images" :alt="item.title" class="product-image"/>
+                <img :src="item.images" :alt="item.title" class="product-image" />
               </router-link>
             </li>
           </ul>
@@ -48,8 +46,10 @@ export default {
   },
   data () {
     return {
-      sliders: [],
-      sliderSpeed: 2000,
+      sliders: [], 
+      title: '', 
+      image: '', 
+      sliderSpeed: 2000, 
       post: {
         class: "hotpost",
         title: "今日热闻",
@@ -58,10 +58,14 @@ export default {
     };
   },
   mounted () {
-    axios.get("/api/4/news/latest").then(res => {
-      this.sliders = res.data.top_stories;
-      this.post.list = res.data.stories;
-    });
+    axios.get("/api/4/news/latest")
+    .then(res => {
+      this.sliders = res.data.top_stories[0] ? res.data.top_stories : null;
+      this.post.list = res.data.stories[0] ? res.data.stories : null;
+    })
+    .catch(error => {
+      console.log(error);
+    })
   },
   methods: {
     doIt () {
